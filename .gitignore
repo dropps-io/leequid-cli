@@ -1,0 +1,10 @@
+/dist
+/node_modules
+/.idea
+
+/shares
+/seeds-shares
+/seeds
+/public-keys
+/private-keys
+/output
