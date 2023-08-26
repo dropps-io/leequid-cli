@@ -113,8 +113,8 @@ yargs(hideBin(process.argv))
           demandOption: true,
         });
     },
-    (argv) => {
-      decryptFileWithPrivateKey(argv.file, argv['private-key']);
+    async (argv) => {
+      await decryptFileWithPrivateKey(argv.file, argv['private-key']);
       console.log(`Decrypted the content of ${argv.file} successfully.`);
     },
   )

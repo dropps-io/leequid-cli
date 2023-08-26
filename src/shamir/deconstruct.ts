@@ -43,7 +43,7 @@ export const deconstructSeedPhraseAndSaveInFile = (
     const content = `${seedName}: ${share}\n`;
 
     // Write the content to the file
-    if (overwrite || !fs.existsSync(filePath)) {
+    if (overwrite && fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, content);
     } else {
       fs.appendFileSync(filePath, content);
