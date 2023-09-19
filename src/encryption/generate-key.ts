@@ -8,9 +8,21 @@ import * as fs from 'fs';
  * @param {string} outputPath - The directory where the keys will be saved.
  */
 export const generateKeyPair = (outputPath: string): void => {
-  const passphrase = readlineSync.question('Enter the passphrase: ', {
-    hideEchoBack: true, // This hides the passphrase from being displayed
-  });
+  let passphrase: string;
+  let confirmation: string;
+
+  do {
+    passphrase = readlineSync.question('Enter the passphrase: ', {
+      hideEchoBack: true, // This hides the passphrase from being displayed
+    });
+    confirmation = readlineSync.question('Confirm the passphrase: ', {
+      hideEchoBack: true, // This hides the passphrase from being displayed
+    });
+
+    if (passphrase !== confirmation) {
+      console.log('Passphrases do not match. Please try again.');
+    }
+  } while (passphrase !== confirmation);
 
   if (!fs.existsSync(outputPath)) {
     fs.mkdirSync(outputPath, { recursive: true });
@@ -34,3 +46,4 @@ export const generateKeyPair = (outputPath: string): void => {
   fs.writeFileSync(`${outputPath}/pubkey`, publicKey);
   fs.writeFileSync(`${outputPath}/privatekey`, privateKey);
 };
+
